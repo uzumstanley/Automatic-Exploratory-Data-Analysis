@@ -1,59 +1,70 @@
-import seaborn as sns
+import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.preprocessing import LabelEncoder
 
 def plot_histograms(df):
-    numeric_df = df.select_dtypes(include=['number'])  # Only numeric columns
-    fig, ax = plt.subplots(figsize=(12, 6))
-    numeric_df.hist(ax=ax, bins=30)
-    return fig
+    """Plots histograms for all numeric columns in the DataFrame."""
+    df.hist(figsize=(10, 6), bins=30)
+    plt.suptitle("Histograms of Numeric Features")
+    plt.show()
 
 def plot_correlation_matrix(df):
-    numeric_df = df.select_dtypes(include=['number'])  # Only numeric columns
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(numeric_df.corr(), annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
-    return fig
+    """Plots the correlation matrix heatmap."""
+    numeric_df = df.select_dtypes(include=["number"])
+    if numeric_df.empty:
+        return None
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(numeric_df.corr(), annot=True, cmap="coolwarm", fmt=".2f")
+    plt.title("Correlation Matrix")
+    return plt
 
-def plot_countplots(df):
-    categorical_cols = df.select_dtypes(include=['object']).columns
-    figs = []
-    for col in categorical_cols:
-        fig, ax = plt.subplots(figsize=(8, 4))
-        sns.countplot(data=df, x=col, ax=ax)
-        ax.set_title(f"Count Plot of {col}")
-        figs.append(fig)
-    return figs
+def perform_pca(df):
+    """Performs Principal Component Analysis (PCA) on numeric features and plots explained variance."""
+    numeric_df = df.select_dtypes(include=["number"])
+    if numeric_df.empty:
+        return None, None
 
-def plot_boxplots(df):
-    numeric_cols = df.select_dtypes(include=['number']).columns
-    figs = []
-    for col in numeric_cols:
-        fig, ax = plt.subplots(figsize=(8, 4))
-        sns.boxplot(data=df, x=col, ax=ax)
-        ax.set_title(f"Box Plot of {col}")
-        figs.append(fig)
-    return figs
+    pca = PCA(n_components=min(3, len(numeric_df.columns)))
+    pca_result = pca.fit_transform(numeric_df)
+    explained_variance = pca.explained_variance_ratio_
 
-def plot_violinplots(df):
-    numeric_cols = df.select_dtypes(include=['number']).columns
-    figs = []
-    for col in numeric_cols:
-        fig, ax = plt.subplots(figsize=(8, 4))
-        sns.violinplot(data=df, x=col, ax=ax)
-        ax.set_title(f"Violin Plot of {col}")
-        figs.append(fig)
-    return figs
+    fig, ax = plt.subplots()
+    ax.bar(range(len(explained_variance)), explained_variance)
+    ax.set_xlabel("Principal Components")
+    ax.set_ylabel("Explained Variance")
+    ax.set_title("PCA Explained Variance")
 
-def plot_pairplot(df):
-    numeric_df = df.select_dtypes(include=['number'])  # Only numeric columns
-    fig = sns.pairplot(numeric_df)
-    return fig
+    return explained_variance, fig
 
-def plot_kde(df):
-    numeric_cols = df.select_dtypes(include=['number']).columns
-    figs = []
-    for col in numeric_cols:
-        fig, ax = plt.subplots(figsize=(8, 4))
-        sns.kdeplot(df[col], ax=ax, fill=True)
-        ax.set_title(f"KDE Plot of {col}")
-        figs.append(fig)
-    return figs
+def feature_importance(df, target_column):
+    """Computes feature importance using Random Forest and plots a bar chart."""
+    df_clean = df.dropna()
+    X = df_clean.drop(columns=[target_column])
+    y = df_clean[target_column]
+
+    # Encode categorical variables
+    for col in X.select_dtypes(include=['object']).columns:
+        X[col] = LabelEncoder().fit_transform(X[col])
+
+    # Choose classification or regression model
+    if y.dtype == 'O' or len(y.unique()) < 10:
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        y = LabelEncoder().fit_transform(y)
+    else:
+        model = RandomForestRegressor(n_estimators=100, random_state=42)
+
+    model.fit(X, y)
+    importance = model.feature_importances_
+
+    feature_importance_df = pd.DataFrame({"Feature": X.columns, "Importance": importance}).sort_values(
+        by="Importance", ascending=False
+    )
+
+    fig, ax = plt.subplots()
+    sns.barplot(data=feature_importance_df, x="Importance", y="Feature", ax=ax)
+    ax.set_title("Feature Importance (Random Forest)")
+
+    return feature_importance_df, fig
