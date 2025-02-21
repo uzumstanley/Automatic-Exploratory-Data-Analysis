@@ -13,3 +13,15 @@ This project is a Streamlit-based Exploratory Data Analysis (EDA) tool that allo
 The tool is modularized inside the eda_tool/ package, making it easy to extend and maintain.
 
 📂 Project Structure
+
+Automatic-Exploratory-Data-Analysis/
+│── eda_tool/
+│   ├── __init__.py
+│   ├── data_loader.py          # Handles CSV data loading
+│   ├── eda_summary.py          # Provides summary statistics
+│   ├── missing_values.py       # Handles missing value analysis
+│   ├── outlier_detection.py    # Detects outliers
+│   ├── visualization.py        # Visualization functions (histograms, PCA, feature importance)
+│── app.py                      # Streamlit app
+│── requirements.txt            # Dependencies
+│── README.md                   # Project documentation
