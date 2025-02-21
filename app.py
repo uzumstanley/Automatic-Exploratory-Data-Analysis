@@ -101,7 +101,7 @@ if uploaded_file:
         if y.dtype == 'O' or len(y.unique()) < 10:  
             model = RandomForestClassifier(n_estimators=100, random_state=42)
             y = LabelEncoder().fit_transform(y)  # Encode target if categorical
-        else:
+    else:
             model = RandomForestRegressor(n_estimators=100, random_state=42)
 
         model.fit(X, y)
