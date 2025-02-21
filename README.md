@@ -1,41 +1,14 @@
-**EDA Tool**
+📌 Automatic Exploratory Data Analysis (EDA) Tool
+🚀 A simple and interactive Streamlit app for automatic exploratory data analysis (EDA), including PCA and feature importance analysis.
 
-**Overview**
+📖 Overview
 
-EDA Tool is an Exploratory Data Analysis (EDA) application designed to help users analyze and visualize datasets efficiently. It provides automated statistical summaries, data cleaning options, and interactive visualizations to gain insights into structured data.
+This project is a Streamlit-based Exploratory Data Analysis (EDA) tool that allows users to upload CSV datasets and perform various analyses, including:
+✅ Data Summary & Statistics
+✅ Histograms of Numeric Features
+✅ Correlation Matrix Heatmap
+✅ Principal Component Analysis (PCA)
+✅ Feature Importance using Random Forest
 
-**Features:**
+The tool is modularized inside the eda_tool/ package, making it easy to extend and maintain.
 
-Automated data summarization
-
-Handling missing values
-
-Data distribution plots
-
-Correlation matrix visualization
-
-Outlier detection
-
-Interactive charts
-
-Customizable data transformations
-
-**Installation**
-
-pip install -r requirements.txt
-
-**Usage**
-
-python eda_tool.py --dataset path/to/dataset.csv
-
-Dependencies
-
-Python 3.12.5
-
-Pandas
-
-Matplotlib
-
-Seaborn
-
-NumPy
