@@ -68,10 +68,10 @@ if uploaded_file:
     else:
         st.error("Error while loading the dataset.")
         
-with st.expander("Show PCA (Principal Component Analysis)"):
-    numeric_df = df.select_dtypes(include=["number"])
+       with st.expander("Show PCA (Principal Component Analysis)"):
+            numeric_df = df.select_dtypes(include=["number"])
     
-    if not numeric_df.empty:
+     if not numeric_df.empty:
         pca = PCA(n_components=min(3, len(numeric_df.columns)))  # Max 3 components
         pca_result = pca.fit_transform(numeric_df)
         explained_variance = pca.explained_variance_ratio_
@@ -83,13 +83,13 @@ with st.expander("Show PCA (Principal Component Analysis)"):
         ax.set_ylabel("Explained Variance")
         ax.set_title("PCA Explained Variance")
         st.pyplot(fig)
-    else:
+   else:
         st.write("No numeric columns available for PCA.")
-with st.expander("Show Feature Importance (Random Forest)"):
-    df_clean = df.dropna()  # Drop missing values
-    target_column = st.selectbox("Select Target Column for Feature Importance", df.columns)
+      with st.expander("Show Feature Importance (Random Forest)"):
+         df_clean = df.dropna()  # Drop missing values
+         target_column = st.selectbox("Select Target Column for Feature Importance", df.columns)
     
-    if target_column:
+        if target_column:
         X = df_clean.drop(columns=[target_column])
         y = df_clean[target_column]
 
