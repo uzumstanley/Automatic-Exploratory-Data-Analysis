@@ -1,3 +1,6 @@
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.preprocessing import LabelEncoder
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
