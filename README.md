@@ -26,3 +26,48 @@ Automatic-Exploratory-Data-Analysis/
 │── requirements.txt            # Dependencies
 │── README.md                   # Project documentation
 
+
+🚀 Features
+
+🔹 Data Summary & Insights
+Displays key statistics such as mean, median, and standard deviation.
+Identifies missing values in the dataset.
+🔹 Data Visualization
+Histograms for numerical columns.
+Correlation Matrix heatmap for feature relationships.
+🔹 Advanced Analysis
+Principal Component Analysis (PCA): Visualizes explained variance.
+Feature Importance Analysis: Uses Random Forest to determine the most important features.
+💻 Installation & Setup
+
+1️⃣ Clone the repository
+git clone https://github.com/your-username/Automatic-Exploratory-Data-Analysis.git
+cd Automatic-Exploratory-Data-Analysis
+2️⃣ Create a virtual environment (Optional but recommended)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+3️⃣ Install dependencies
+pip install -r requirements.txt
+4️⃣ Run the Streamlit app
+streamlit run app.py
+📌 Usage
+
+Open the Streamlit interface in your browser.
+Upload a CSV file.
+Explore the dataset using the available analysis options.
+Select a target variable for feature importance analysis.
+🔧 Configuration
+
+🛠️ Technologies Used
+
+Python 3.x
+Pandas, NumPy (Data Processing)
+Matplotlib, Seaborn (Visualizations)
+Scikit-learn (Machine Learning for PCA & Feature Importance)
+Streamlit (Interactive Web App)
+📌 Future Improvements
+
+✅ Support for time-series analysis.
+✅ More outlier detection techniques.
+✅ Dynamic feature selection for ML model training.
+
