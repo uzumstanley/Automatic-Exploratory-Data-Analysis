@@ -12,3 +12,4 @@ This project is a Streamlit-based Exploratory Data Analysis (EDA) tool that allo
 
 The tool is modularized inside the eda_tool/ package, making it easy to extend and maintain.
 
+📂 Project Structure
