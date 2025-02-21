@@ -5,3 +5,4 @@ seaborn
 plotly 
 missingno 
 streamlit
+scikit-learn
