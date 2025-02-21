@@ -67,3 +67,21 @@ if uploaded_file:
 
     else:
         st.error("Error while loading the dataset.")
+        
+with st.expander("Show PCA (Principal Component Analysis)"):
+    numeric_df = df.select_dtypes(include=["number"])
+    
+    if not numeric_df.empty:
+        pca = PCA(n_components=min(3, len(numeric_df.columns)))  # Max 3 components
+        pca_result = pca.fit_transform(numeric_df)
+        explained_variance = pca.explained_variance_ratio_
+
+        st.write(f"Explained Variance Ratio: {explained_variance}")
+        fig, ax = plt.subplots()
+        ax.bar(range(len(explained_variance)), explained_variance)
+        ax.set_xlabel("Principal Components")
+        ax.set_ylabel("Explained Variance")
+        ax.set_title("PCA Explained Variance")
+        st.pyplot(fig)
+    else:
+        st.write("No numeric columns available for PCA.")
