@@ -1,3 +1,5 @@
+link to the project:  https://automatic-exploratory-data-analysis-rfzmcrpraqxdvfnuuyms6k.streamlit.app
+
 📌 Automatic Exploratory Data Analysis (EDA) Tool
 🚀 A simple and interactive Streamlit app for automatic exploratory data analysis (EDA), including PCA and feature importance analysis.
 
