@@ -25,3 +25,4 @@ Automatic-Exploratory-Data-Analysis/
 │── app.py                      # Streamlit app
 │── requirements.txt            # Dependencies
 │── README.md                   # Project documentation
+
