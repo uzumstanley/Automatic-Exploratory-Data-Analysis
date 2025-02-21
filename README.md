@@ -39,9 +39,3 @@ Matplotlib
 Seaborn
 
 NumPy
-
-**Contributing**
-
-**Feel free to contribute by submitting issues or pull requests. Ensure your code follows PEP 8 standards.**
-
-**@Raghava44u**
